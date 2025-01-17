@@ -30,6 +30,7 @@ import com.learning.expencetracker.Model.UpdateBookModel.UpdateBookInputModel
 import com.learning.expencetracker.R
 import com.learning.expencetracker.Utils.Constants
 import com.learning.expencetracker.ViewModel.BookViewModel
+import com.learning.expencetracker.ViewModel.MoneyTransViewModel
 import com.learning.expencetracker.ViewModel.PaymentViewModel
 import com.learning.expencetracker.databinding.FragmentHomeBinding
 
@@ -51,31 +52,28 @@ class HomeFragment : Fragment() {
     ): View {
         binding =FragmentHomeBinding.inflate(inflater, container, false)
 
-        try{
+        try {
             lis.clear()
-            Log.d("rk","On create called")
+            Log.d("rk", "On create called")
             viewModel1 = ViewModelProvider(this)[PaymentViewModel::class.java]
             viewModel = ViewModelProvider(requireActivity())[BookViewModel::class.java]
 
-            val sharedPreference =  requireActivity().getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+            val sharedPreference =
+                requireActivity().getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
             var editor = sharedPreference.edit()
-            token = sharedPreference.getString(Constants.TOKEN,"defaultName").toString()
+            token = sharedPreference.getString(Constants.TOKEN, "defaultName").toString()
 
-            var sfLis = sharedPreference.getString(Constants.BOOKS_DATA,null)
-            if(sfLis == null)
-            {
+            var sfLis = sharedPreference.getString(Constants.BOOKS_DATA, null)
+            if (sfLis == null) {
                 showProgressBar(requireActivity())
-                viewModel.getBooks(requireContext(),this, "Bearer ${token}")
-            }
-            else
-            {
+                viewModel.getBooks(requireContext(), this, "Bearer ${token}")
+            } else {
                 val gson = Gson()
                 val listType = object : TypeToken<ArrayList<BookNamesDisplayModel>>() {}.type
                 val userList: ArrayList<BookNamesDisplayModel> = gson.fromJson(sfLis, listType)
-                lis=userList
+                lis = userList
                 adapter(userList)
             }
-
             viewModel.observerForGetBooks().observe(viewLifecycleOwner , Observer {
                     result->
                 if(result!=null)

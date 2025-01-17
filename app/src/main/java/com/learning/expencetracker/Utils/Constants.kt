@@ -22,11 +22,10 @@ object Constants {
     const val BOOKS_DATA="books_data"
     const val PAYMENT_TYPE="paymentType"
     const val BOOKNAME = "bookname"
-    val baseUrl = "https://us-central1-all-backend-fd5c7.cloudfunctions.net"
-//    val baseUrl = "http://13.201.49.175:3200"
-    val baseUrl1 = "https://expense-tracker-backend-2qzh.onrender.com"
+    val baseUrl = "https://expence-tracker-backend-b0tv.onrender.com"
 
-
+    val SHARED_PREFERENCE= "sp_details"
+    val ENTRIED= "entries"
     var client = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)
         .writeTimeout(15, TimeUnit.SECONDS)
