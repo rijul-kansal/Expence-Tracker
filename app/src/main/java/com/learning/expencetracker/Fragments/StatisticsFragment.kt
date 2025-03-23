@@ -3,6 +3,7 @@ package com.learning.expencetracker.Fragments
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.learning.expencetracker.Activity.SignInActivity
 import com.learning.expencetracker.Adapter.GraphItemAdapter
 import com.learning.expencetracker.Model.BookNamesDisplayModel
 import com.learning.expencetracker.Model.GraphShownModel
@@ -122,6 +124,11 @@ class StatisticsFragment : Fragment() {
     }
     fun errorFn(message: String) {
         cancelProgressBar()
+        if(message == "Cannot read properties of undefined (reading 'id')")
+        {
+            startActivity(Intent(requireActivity() , SignInActivity::class.java))
+            requireActivity().finish()
+        }
         toast(requireActivity(), message)
     }
 

@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.learning.expencetracker.Activity.AllTransDisplayActivity
+import com.learning.expencetracker.Activity.SignInActivity
 import com.learning.expencetracker.Adapter.BookNameDisplayAdapter
 import com.learning.expencetracker.Model.BookNamesDisplayModel
 import com.learning.expencetracker.Model.CreateNewBook.CreateNewBookInputModel
@@ -198,30 +199,29 @@ class HomeFragment : Fragment() {
         }
         cancelProgressBar()
         toast(requireActivity(), message)
+        if(message == "Cannot read properties of undefined (reading 'id')")
+        {
+            startActivity(Intent(requireActivity() , SignInActivity::class.java))
+            requireActivity().finish()
+        }
         binding.refreshLayout.isRefreshing = false
     }
 
-    fun showProgressBar(context: Context)
-    {
+    fun showProgressBar(context: Context) {
         dialog = Dialog(context)
         dialog!!.setContentView(R.layout.progress_bar)
         dialog!!.setCancelable(false)
         dialog!!.show()
     }
-
-    fun cancelProgressBar()
-    {
+    fun cancelProgressBar() {
         if(dialog!=null)
         {
             dialog!!.cancel()
         }
     }
-
-    fun toast(context: Context, message:String)
-    {
+    fun toast(context: Context, message:String) {
         Toast.makeText(context,message, Toast.LENGTH_LONG).show()
     }
-
     fun addingNewBook() {
         try {
             bookNameDialog = Dialog(requireContext(), android.R.style.Theme_Translucent_NoTitleBar)
@@ -250,7 +250,6 @@ class HomeFragment : Fragment() {
             Log.d("rk",err.message.toString())
         }
     }
-
     fun adapter(lis : ArrayList<BookNamesDisplayModel>){
         binding.recycleView.layoutManager = LinearLayoutManager(requireActivity())
         ItemAdapter = BookNameDisplayAdapter(lis)
@@ -292,7 +291,6 @@ class HomeFragment : Fragment() {
             }
         )
     }
-
     fun displayMembersDialog(lis: List<String?>?) {
         val builderSingle = AlertDialog.Builder(requireContext())
         builderSingle.setIcon(R.drawable.logo)

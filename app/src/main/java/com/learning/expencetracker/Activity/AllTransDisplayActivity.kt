@@ -4,6 +4,7 @@ package com.learning.expencetracker.Activity
 import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -529,7 +530,13 @@ class AllTransDisplayActivity : BaseActivity() {
     }
     fun errorFn(message: String) {
         cancelProgressBar()
+        if(message == "Cannot read properties of undefined (reading 'id')")
+        {
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
+        }
         toast(this, message)
+
     }
     fun adapter(lis : ArrayList<TransDisplayModel>){
         binding.recycleView.layoutManager = LinearLayoutManager(this)
@@ -540,7 +547,6 @@ class AllTransDisplayActivity : BaseActivity() {
         ItemAdapter.setOnClickListener(object :
             TransDisplayAdapter.OnClickListener {
             override fun onClick(position: Int, model: TransDisplayModel) {
-                toast(this@AllTransDisplayActivity ,lis[position].toString())
                 if(lis[position].moneyType == "Out")
                 {
                     lis[position].amount?.let {
@@ -736,7 +742,7 @@ class AllTransDisplayActivity : BaseActivity() {
         val downloadLL = view.findViewById<LinearLayout>(R.id.downlardLL)
 
         resetLL.setOnClickListener {
-            toast(this,"Reset Filters")
+
             filterMembers=null
             filterType=null
             filterCat=null
