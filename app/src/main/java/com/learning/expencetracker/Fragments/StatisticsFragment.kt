@@ -42,7 +42,6 @@ class StatisticsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding =FragmentStatisticsBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity())[MoneyTransViewModel::class.java]
         viewModel1 = ViewModelProvider(requireActivity())[BookViewModel::class.java]
@@ -184,6 +183,11 @@ class StatisticsFragment : Fragment() {
         binding.recycleViewAmountOut.layoutManager = LinearLayoutManager(requireActivity())
         val ItemAdapter = GraphItemAdapter(lis)
         binding.recycleViewAmountOut.adapter = ItemAdapter
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 
 }

@@ -110,6 +110,7 @@ class AllTransDisplayActivity : BaseActivity() {
                         binding.moneyInTV.text = moneyIn.toString()
                         binding.moneyOutTV.text = moneyOut.toString()
                         binding.totalBalanceTV.text=(moneyIn-moneyOut).toString()
+                        binding.cardView.visibility = View.VISIBLE
                         adapter(lis)
                     }
 
@@ -728,7 +729,6 @@ class AllTransDisplayActivity : BaseActivity() {
 
     fun displayDialogFor3Dots(location : IntArray)
     {
-
         dialogFor3Dots =Dialog(this)
         val view: View = LayoutInflater.from(this).inflate(R.layout.menu_dialog_2, null)
         dialogFor3Dots!!.setContentView(view)

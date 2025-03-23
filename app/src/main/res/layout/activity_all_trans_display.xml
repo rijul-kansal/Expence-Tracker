@@ -53,7 +53,7 @@
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="date"
+                    android:text="Date"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="12sp"/>
@@ -79,7 +79,7 @@
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="type"
+                    android:text="Type"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="12sp"/>
@@ -104,7 +104,7 @@
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="members"
+                    android:text="Members"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="12sp"/>
@@ -129,7 +129,7 @@
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="category"
+                    android:text="Category"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="12sp"/>
@@ -147,7 +147,7 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="search"
+                android:text="Search"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="12sp"/>
@@ -156,6 +156,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="32dp"
@@ -165,13 +166,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="4dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

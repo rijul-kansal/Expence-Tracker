@@ -39,16 +39,16 @@
             android:id="@+id/recycleView"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <TextView
-        android:textSize="16dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         android:id="@+id/addBookBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_book"
+        android:text="+"
         android:layout_gravity="bottom|right"
         android:background="@drawable/button_bg_add"
         android:textColor="@color/white"
-        android:padding="16dp"
+        android:padding="8dp"
         android:layout_marginBottom="32dp"
         android:layout_marginRight="32dp"/>
 
