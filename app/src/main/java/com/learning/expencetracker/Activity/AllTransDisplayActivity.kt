@@ -79,7 +79,7 @@ class AllTransDisplayActivity : BaseActivity() {
                 bookId = intent.getStringExtra(Constants.BOOKID).toString()
                 bookName = intent.getStringExtra(Constants.BOOKNAME).toString()
                 lisMembers= intent.getStringArrayListExtra(Constants.MEMBERS)!!
-
+                binding.toolbar.setTitle(bookName)
 
             }
             showProgressBar(this)

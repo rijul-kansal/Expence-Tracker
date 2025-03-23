@@ -271,6 +271,9 @@ class HomeFragment : Fragment() {
                 intent.putExtra(Constants.TOKEN,token)
                 intent.putExtra(Constants.MEMBERS,arr)
                 requireActivity().startActivity(intent)
+                lis.removeAt(position)
+                lis.add(0,model)
+                ItemAdapter!!.notifyDataSetChanged()
             }
         })
 
@@ -320,7 +323,6 @@ class HomeFragment : Fragment() {
         }
         builderSingle.show()
     }
-
     fun displayMembersDialogForDeletion(lis: List<String?>?, id : String) {
 
         var arrlis : ArrayList<String> = ArrayList()
@@ -358,9 +360,7 @@ class HomeFragment : Fragment() {
         }
         builderMultiple.show()
     }
-
-    fun displayDialogFor3Dots(location : IntArray, pos:Int)
-    {
+    fun displayDialogFor3Dots(location : IntArray, pos:Int) {
 
         dialog =Dialog(requireContext())
         val view: View = LayoutInflater.from(requireActivity()).inflate(R.layout.menu_dialog, null)
