@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -34,6 +35,7 @@ import com.learning.expencetracker.ViewModel.BookViewModel
 import com.learning.expencetracker.ViewModel.MoneyTransViewModel
 import com.learning.expencetracker.ViewModel.PaymentViewModel
 import com.learning.expencetracker.databinding.FragmentHomeBinding
+import java.util.logging.Handler
 
 
 class HomeFragment : Fragment() {
@@ -272,7 +274,9 @@ class HomeFragment : Fragment() {
                 requireActivity().startActivity(intent)
                 lis.removeAt(position)
                 lis.add(0,model)
-                ItemAdapter!!.notifyDataSetChanged()
+                android.os.Handler().postDelayed({
+                    ItemAdapter!!.notifyDataSetChanged()
+                }, 2000)
             }
         })
 
@@ -376,7 +380,7 @@ class HomeFragment : Fragment() {
         renameBtn.setOnClickListener{
 
             dialog!!.dismiss()
-            dialogToEnterOneInput("Rename book","please enter new book name", "rename","Rename",lis,pos)
+            lis[pos].name?.let { it1 -> dialogToEnterOneInput(it1,"Rename book","please enter new book name", "rename","Rename",lis,pos) }
         }
         deleteBtn.setOnClickListener{
             dialog!!.dismiss()
@@ -386,7 +390,7 @@ class HomeFragment : Fragment() {
 
         addMembersBtn.setOnClickListener {
             dialog!!.dismiss()
-            dialogToEnterOneInput("Add member to book","please enter email address", "addMember","Add",lis,pos)
+            dialogToEnterOneInput("null","Add member to book","please enter email address", "addMember","Add",lis,pos)
         }
         deleteMembersBtn.setOnClickListener {
             var liss =lis[pos].userId
@@ -395,8 +399,9 @@ class HomeFragment : Fragment() {
         }
         dialog!!.show()
     }
-    fun dialogToEnterOneInput(title :String , hint :String , type:String , buttonText :String , lis : ArrayList<BookNamesDisplayModel>, position:Int) {
+    fun dialogToEnterOneInput(givenText:String,title :String , hint :String , type:String , buttonText :String , lis : ArrayList<BookNamesDisplayModel>, position:Int) {
         try{
+
             dialogToEnterOneInput = Dialog(requireActivity(), android.R.style.Theme_Translucent_NoTitleBar)
             dialogToEnterOneInput=Dialog(requireActivity())
             val view: View = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_for_common_use, null)
@@ -410,14 +415,15 @@ class HomeFragment : Fragment() {
 
 
             view.findViewById<TextView>(R.id.titleTv).text = title
-//            view.findViewById<TextInputEditText>(R.id.editText1).hint = hint
             view.findViewById<TextView>(R.id.sendOtpBtn).text = buttonText
 
             if(type == "rename")
             {
+                view.findViewById<EditText>(R.id.emailET).setText(givenText)
                 submitOtpButton.setOnClickListener {
                     showProgressBar(requireActivity())
                     var newBookName = view.findViewById<EditText>(R.id.emailET).text.toString()
+
                     lis[position]._id?.let { it1 ->
                         viewModel.updateBook(requireContext(), this, "Bearer ${token}" , it1,
                             UpdateBookInputModel(name = newBookName)
@@ -444,6 +450,7 @@ class HomeFragment : Fragment() {
             Log.d("rk",err.toString())
         }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
